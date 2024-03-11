@@ -1,13 +1,11 @@
 import "../global.css"
 import React from "react";
-import { Slot } from "expo-router";
-import { Navbar } from "@/component/Navbar";
+import { Stack } from 'expo-router/stack';
 
-export default function RootLayout() {
+export default function AppLayout() {
     return (
-        <>
-            <Slot />
-            {/* <Nav /> */}
-        </>
-    )
+        <Stack>
+            <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+        </Stack>
+    );
 }
