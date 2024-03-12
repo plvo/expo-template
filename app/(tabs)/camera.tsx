@@ -29,8 +29,8 @@ const Page = () => {
     }
 
     return (
-        <View className='flex-1 justify-center h-full   bg-blue-500'>
-            <Camera className='flex-1 border-[2px] border-white' type={type} flashMode={flash} focusDepth={1} zoom={0}>
+        <View style={styles.container}>
+            <Camera style={styles.camera} type={type} flashMode={flash} focusDepth={1} zoom={0}>
                 <View style={styles.buttonContainer}>
                     <TouchableOpacity style={styles.button} onPress={toggleCameraType}>
                         <Text style={styles.text}>Flip Camera</Text>
@@ -45,7 +45,13 @@ const Page = () => {
 }
 
 const styles = StyleSheet.create({
-
+    container: {
+        flex: 1,
+        justifyContent: 'center',
+    },
+    camera: {
+        flex: 1,
+    },
     buttonContainer: {
         flex: 1,
         flexDirection: 'row',

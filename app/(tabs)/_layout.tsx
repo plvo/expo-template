@@ -6,6 +6,7 @@ export default function TabLayout() {
     return (
         <Tabs
             screenOptions={{
+                headerShown:false,
                 tabBarActiveTintColor: "red",
                 tabBarStyle: {
                     backgroundColor: "black",
@@ -40,6 +41,7 @@ export default function TabLayout() {
                 name="profile"
                 options={{
                     title: 'Profile',
+                    headerShown:true,
                     tabBarIcon: ({ color }) => <FontAwesome size={28} name="user" color={color} />,
                 }}
             />
