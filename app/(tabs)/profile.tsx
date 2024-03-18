@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, Text } from 'react-native';
 import { useForm, Controller } from "react-hook-form"
-import { Avatar, Button, Input, Label, Separator, XGroup, XStack, YGroup, YStack } from 'tamagui';
+import { Avatar, Button, Input, Label, Separator, XGroup, YGroup, YStack } from 'tamagui';
 import Toast from 'react-native-toast-message';
 import * as ImagePicker from 'expo-image-picker';
 
@@ -54,7 +54,7 @@ const Page = () => {
             <Separator borderColor={"black"} />
 
             <YStack>
-                <XGroup gap={20} borderWidth={'$1'}>
+                <XGroup gap={20}>
                     <Controller control={control}
                         name="firstName"
                         rules={{
