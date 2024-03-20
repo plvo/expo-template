@@ -1,8 +1,8 @@
-import { Text, View } from "react-native"
+import { Text, View } from "tamagui"
 
 const Page = () => {
     return (
-        <View>
+        <View backgroundColor={"$red10Dark"} flex={1} alignItems="center" justifyContent="center" >
             <Text>About page</Text>
         </View>
     )

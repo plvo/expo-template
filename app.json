@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "app-ts-first",
-    "slug": "app-ts-first",
+    "name": "pelavo expo template",
+    "slug": "pelavo-expo-template",
     "version": "1.0.0",
     "orientation": "portrait",
     "scheme": "app-ts-first-scheme",
@@ -16,10 +16,7 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true,
-      "config": {
-        "googleMapsApiKey":"AIzaSyBPgDWGtOMOsFdkKnF45UKAo5sEj1o6xXI"
-      }
+      "supportsTablet": true
     },
     "android": {
       "adaptiveIcon": {
@@ -32,6 +29,12 @@
     },
     "plugins": [
       "expo-router",
+      [
+        "expo-font",
+        {
+          "fonts": ["./assets/fonts/ArchivGrotesk.otf"]
+        }
+      ],
       [
         "expo-image-picker",
         {

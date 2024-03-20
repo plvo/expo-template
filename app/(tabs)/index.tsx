@@ -10,7 +10,6 @@ const Page = () => {
 
   useEffect(() => {
     (async () => {
-
       let { status } = await Location.requestForegroundPermissionsAsync();
 
       console.log(status);

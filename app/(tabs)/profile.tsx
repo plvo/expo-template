@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text } from 'react-native';
 import { useForm, Controller } from "react-hook-form"
-import { Avatar, Button, Input, Label, Separator, XGroup, YGroup, YStack } from 'tamagui';
+import { Avatar, Button, Input, Label, Separator, Text, XGroup, YGroup, YStack } from 'tamagui';
 import Toast from 'react-native-toast-message';
 import * as ImagePicker from 'expo-image-picker';
 
@@ -23,8 +22,8 @@ const Page = () => {
 
     const { control, handleSubmit, formState: { errors } } = useForm({
         defaultValues: {
-            firstName: "",
-            lastName: "",
+            firstname: "",
+            lastname: "",
             city: "",
             birthday: ""
         },
@@ -39,7 +38,7 @@ const Page = () => {
     }
 
     return (
-        <YStack paddingHorizontal="$6" paddingVertical="$3" gap={'$8'} className='bg-slate-200'>
+        <YStack height={"100%"} paddingHorizontal="$6" paddingVertical="$3" gap={'$4'} backgroundColor={'$gray10'}>
             <YStack alignContent='center' alignItems='center' gap={'$3'} onPress={pickImage}>
                 <Avatar circular size="$10">
                     <Avatar.Image
@@ -56,26 +55,29 @@ const Page = () => {
             <YStack>
                 <XGroup gap={20}>
                     <Controller control={control}
-                        name="firstName"
+                        name="firstname"
                         rules={{
                             required: true,
                         }}
                         render={({ field: { onChange, onBlur, value } }) => (
                             <YGroup flex={1}>
-                                <Label htmlFor='firstname'>Firstname</Label>
+                                <Label htmlFor='firstname' color={errors.firstname && '$red10'}>
+                                    {errors.firstname ? "Firstname is required" : "Firstname"}
+                                </Label>
                                 <Input
                                     placeholder="First name"
                                     onBlur={onBlur}
                                     onChangeText={onChange}
                                     value={value}
+                                    borderColor={errors.firstname && '$red10'}
+                                    borderWidth={'$1'}
                                     id='firstname'
                                 />
-                                {errors.firstName && <Text className="text-red-500">This is required.</Text>}
                             </YGroup>
                         )}
                     />
                     <Controller control={control}
-                        name="lastName"
+                        name="lastname"
                         rules={{ maxLength: 100 }}
                         render={({ field: { onChange, onBlur, value } }) => (
                             <YGroup flex={1}>
@@ -96,7 +98,7 @@ const Page = () => {
                 <YStack>
                     <Controller control={control}
                         name="city"
-                        rules={{ maxLength: 100, }}
+                        rules={{ maxLength: 100 }}
                         render={({ field: { onChange, onBlur, value } }) => (
                             <YGroup>
                                 <Label htmlFor='city'>City</Label>
@@ -112,13 +114,12 @@ const Page = () => {
                     />
 
                     <Controller control={control}
-                        name="city"
-                        rules={{ maxLength: 100, }}
+                        name="birthday"
+                        rules={{ maxLength: 100 }}
                         render={({ field: { onChange, onBlur, value } }) => (
                             <YGroup>
                                 <Label htmlFor='birthday'>Birthday</Label>
                                 <Input
-
                                     placeholder="Birthday"
                                     onBlur={onBlur}
                                     onChangeText={onChange}
@@ -129,27 +130,13 @@ const Page = () => {
                         )}
                     />
                 </YStack>
-
             </YStack>
 
-
-            <Button onPress={handleSubmit(onSubmit)} variant="outlined" bottom={'$0'}>
-                Enregistrer
+            <Button onPress={handleSubmit(onSubmit)} backgroundColor={'$green8'}>
+                Save
             </Button>
         </YStack>
     );
 }
-
-const styles = StyleSheet.create({
-    button: {
-        padding: 4,
-        display: "flex",
-        alignItems: "center",
-        color: "white",
-        borderRadius: 50,
-        backgroundColor: "red",
-    },
-
-})
 
 export default Page

@@ -8,7 +8,6 @@ import '@tamagui/core/reset.css'
 import { TamaguiProvider } from 'tamagui'
 import tamaguiConfig from '@/tamagui.config'
 import Toast, { BaseToast, BaseToastProps, ErrorToast } from 'react-native-toast-message';
-import { Text , View} from "react-native";
 
 const toastConfig = {
     success: (props: React.JSX.IntrinsicAttributes & BaseToastProps) => (
@@ -34,33 +33,32 @@ const toastConfig = {
     ),
 };
 
-SplashScreen.preventAutoHideAsync();
+// SplashScreen.preventAutoHideAsync();
 
 export default function AppLayout() {
-    const [appIsReady, setAppIsReady] = useState<boolean>(false);
+    // const [fontsLoaded, fontError] = Font.useFonts({
+    //     'Grotesk': require('@/assets/fonts/ArchivGrotesk.otf'),
+    // });
 
-    useEffect(() => {
-        (async () => {
-            try {
-                await new Promise(resolve => setTimeout(resolve, 200));
-                // await Font.loadAsync(Entypo.font);
-            } catch (e) {
-                console.warn(e);
-            } finally {
-                setAppIsReady(true);
-            }
-            console.log(appIsReady);
-        })
-    }, []);
+    // console.log(fontsLoaded, fontError);
 
-    if(!appIsReady) return <View style={{display:"flex", justifyContent:"center", alignItems:"center"}}>
-        <Text>!appIsReady</Text>
-    </View>
+    // const onLayoutRootView = useCallback(async () => {
+    //     if (fontsLoaded || fontError) {
+    //         await SplashScreen.hideAsync();
+    //     }
+    // }, [fontsLoaded, fontError]);
+
+    // if (!fontsLoaded && !fontError) {
+    //     return null;
+    // }
 
     return (
         <TamaguiProvider config={tamaguiConfig}>
             <Stack>
-                <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+                <Stack.Screen
+                    name="(tabs)"
+                    options={{ headerShown: false }}
+                />
             </Stack>
             <Toast config={toastConfig} />
         </TamaguiProvider>
