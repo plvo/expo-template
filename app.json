@@ -16,13 +16,21 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.anonymous.pelavoexpotemplate"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#000000"
-      }
+      },
+      "permissions": [
+        "android.permission.RECORD_AUDIO",
+        "android.permission.CAMERA",
+        "android.permission.ACCESS_COARSE_LOCATION",
+        "android.permission.ACCESS_FINE_LOCATION"
+      ],
+      "package": "com.anonymous.pelavoexpotemplate"
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -32,7 +40,9 @@
       [
         "expo-font",
         {
-          "fonts": ["./assets/fonts/ArchivGrotesk.otf"]
+          "fonts": [
+            "./assets/fonts/ArchivGrotesk.otf"
+          ]
         }
       ],
       [
@@ -50,11 +60,26 @@
         }
       ],
       [
+        "@rnmapbox/maps",
+        {
+          "RNMapboxMapsImpl": "mapbox",
+          "RNMapboxMapsDownloadToken": "sk.eyJ1IjoiZ29ybzYxNCIsImEiOiJjbHU3NGk4bHQwMjB2Mmpud2lzOTUxY29zIn0.Nr-6hujNm_btsfOJJDfFrA"
+        }
+      ],
+      [
         "expo-location",
         {
           "locationAlwaysAndWhenInUsePermission": "Allow $(PRODUCT_NAME) to use your location."
         }
       ]
-    ]
+    ],
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "b0e6c214-f885-493c-91f0-a783d7986770"
+      }
+    }
   }
 }
