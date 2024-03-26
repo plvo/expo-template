@@ -8,6 +8,7 @@ import '@tamagui/core/reset.css'
 import { TamaguiProvider } from 'tamagui'
 import tamaguiConfig from '@/tamagui.config'
 import Toast, { BaseToast, BaseToastProps, ErrorToast } from 'react-native-toast-message';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 const toastConfig = {
     success: (props: React.JSX.IntrinsicAttributes & BaseToastProps) => (
@@ -54,12 +55,14 @@ export default function AppLayout() {
 
     return (
         <TamaguiProvider config={tamaguiConfig}>
-            <Stack>
-                <Stack.Screen
-                    name="(tabs)"
-                    options={{ headerShown: false }}
-                />
-            </Stack>
+            <GestureHandlerRootView style={{ flex: 1 }}>
+                <Stack>
+                    <Stack.Screen
+                        name="(tabs)"
+                        options={{ headerShown: false }}
+                    />
+                </Stack>
+            </GestureHandlerRootView>
             <Toast config={toastConfig} />
         </TamaguiProvider>
     )

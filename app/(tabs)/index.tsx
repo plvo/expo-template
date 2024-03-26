@@ -1,64 +1,51 @@
-import React, { useEffect, useState } from 'react';
-import { Text, View } from 'react-native';
-import * as Location from "expo-location";
-import MapView, { Marker, Region } from 'react-native-maps';
+import { MapComponent } from '@/component/Map';
+import BottomSheet, { BottomSheetView } from '@gorhom/bottom-sheet';
+import React, { useCallback, useMemo, useRef } from 'react';
+import { Text } from 'react-native';
+import { Button, Input, View, XStack } from 'tamagui';
+import { Search } from '@tamagui/lucide-icons';
 
 const Page = () => {
-  const [location, setLocation] = useState<Location.LocationObject | null>(null);
-  const [errorMsg, setErrorMsg] = useState<string | null>(null);
-  const [initialRegion, setInitialRegion] = useState<Region | null>(null);
+  const bottomSheetRef = useRef<BottomSheet>(null);
+  const headerRef = useRef(null);
+  const snapPoints = useMemo(() => ['3%', '50%', '100%'], []);
 
-  useEffect(() => {
-    (async () => {
-      let { status } = await Location.requestForegroundPermissionsAsync();
+  const handleSheetChanges = useCallback((indexSnap: number) => {
+    console.log('handleSheetChanges', indexSnap);
+    if (indexSnap === 2) {
 
-      console.log(status);
-
-      if (status !== 'granted') {
-        setErrorMsg('Permission to access location was denied');
-        return;
-      }
-
-      let location = await Location.getCurrentPositionAsync({});
-      setLocation(location);
-      setInitialRegion({
-        latitude: location.coords.latitude,
-        longitude: location.coords.longitude,
-        latitudeDelta: 0.005,
-        longitudeDelta: 0.005,
-      });
-    })();
+    }
   }, []);
 
-  let text = 'Waiting..';
-
-  if (errorMsg) {
-    text = errorMsg;
-  } else if (location) {
-    text = JSON.stringify(location);
-  }
-
-
   return (
-    <View className='bg-red-500 h-screen items-center gap-4'>
-      <MapView
-        style={{ width: "100%", height: "50%" }}
-        initialRegion={initialRegion as Region}
-      >
-        {initialRegion && <Marker
-          coordinate={{
-            latitude: initialRegion.latitude,
-            longitude: initialRegion.longitude
-          }}
-          title='Your location'
-        />}
+    <View flex={1} >
 
-      </MapView>
-      <Text className='font-bold text-white text-7xl'>
-        Welcome
-      </Text>
-      <Text>{text}</Text>
-    </View>
+      <View marginHorizontal={'$4'} marginVertical={'$8'}>
+        <XStack alignItems='center' gap={'$2'}>
+          <Input
+            placeholder="Search on plvo template"
+            onTextInput={() => bottomSheetRef.current?.snapToIndex(1)}
+            flex={1} size={'$4'}
+          />
+          <Button icon={Search} size={'$4'}/>
+        </XStack>
+
+      </View>
+
+      <MapComponent />
+
+      <BottomSheet
+        ref={bottomSheetRef}
+        onChange={handleSheetChanges}
+        snapPoints={snapPoints}
+      >
+
+        <BottomSheetView style={{}}>
+          <Text>Awesome 🎉</Text>
+        </BottomSheetView>
+      </BottomSheet>
+
+    </View >
   );
 };
 

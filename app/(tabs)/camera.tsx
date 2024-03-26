@@ -1,6 +1,7 @@
 import { Camera, CameraType, FlashMode } from 'expo-camera';
 import { useState } from 'react';
-import { Button, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { Button, View } from 'tamagui';
 
 const Page = () => {
     const [type, setType] = useState(CameraType.back);
@@ -11,9 +12,13 @@ const Page = () => {
 
     if (!permission.granted) {
         return (
-            <View>
-                <Text style={{ textAlign: 'center' }}>We need your permission to show the camera</Text>
-                <Button onPress={requestPermission} title="grant permission" />
+            <View flex={1} backgroundColor={'$red10'} alignItems='center' justifyContent='center' gap={'$3'}>
+                <Text style={{ textAlign: 'center' }}>
+                    We need your permission to show the camera
+                </Text>
+                <Button onPress={requestPermission}>
+                    Grant permission
+                </Button>
             </View>
         );
     }
@@ -29,8 +34,8 @@ const Page = () => {
     }
 
     return (
-        <View style={styles.container}>
-            <Camera style={styles.camera} type={type} flashMode={flash} focusDepth={1} zoom={0}>
+        <View flex={1} justifyContent='center'>
+            <Camera style={{ flex: 1 }} type={type} flashMode={flash} focusDepth={1} zoom={0}>
                 <View style={styles.buttonContainer}>
                     <TouchableOpacity style={styles.button} onPress={toggleCameraType}>
                         <Text style={styles.text}>Flip Camera</Text>
@@ -45,13 +50,6 @@ const Page = () => {
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-    },
-    camera: {
-        flex: 1,
-    },
     buttonContainer: {
         flex: 1,
         flexDirection: 'row',
