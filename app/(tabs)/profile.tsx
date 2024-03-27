@@ -15,8 +15,6 @@ const Page = () => {
             quality: 1,
         });
 
-        console.log(result);
-
         if (!result.canceled) setImage(result.assets[0].uri);
     };
 
@@ -29,7 +27,6 @@ const Page = () => {
         },
     })
     const onSubmit = (data: any) => {
-        console.log(data)
         Toast.show({
             type: 'success',
             text1: 'Success',

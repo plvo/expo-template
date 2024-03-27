@@ -32,10 +32,10 @@ export default function TabLayout() {
                 }}
             />
             <Tabs.Screen
-                name="about"
+                name="message"
                 options={{
-                    title: 'About',
-                    tabBarIcon: ({ color }) => <FontAwesome size={28} name="question" color={color} />,
+                    title: 'Message',
+                    tabBarIcon: ({ color }) => <FontAwesome size={28} name="inbox" color={color} />,
                 }}
             />
             <Tabs.Screen
