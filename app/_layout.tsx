@@ -61,6 +61,10 @@ export default function AppLayout() {
                         name="(tabs)"
                         options={{ headerShown: false }}
                     />
+                    <Stack.Screen
+                        name="chat"
+                        options={{ headerShown: false }}
+                    />
                 </Stack>
             </GestureHandlerRootView>
             <Toast config={toastConfig} />

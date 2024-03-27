@@ -1,33 +1,13 @@
+import { Message, User } from "@/type";
+import { router } from "expo-router";
 import React, { useEffect, useState } from "react";
 import { Avatar, ScrollView, SizableText, Text, View, XStack, YStack } from "tamagui";
 
-interface User {
-    id: number,
-    firstName: string,
-    lastName: string,
-    age: number,
-    gender: string,
-    email: string,
-    phone: string,
-    username: string,
-    birthDate: Date,
-    image: string,
-}
-
-interface Message {
-    type: "text" | "image",
-    text: string | null,
-    attachement: [{
-        type: "text" | "image",
-        payload: { url: string },
-        caption: string | null
-    }]
-}
-
-const ContactRow = ({ index, data, message }: { index: number, data: User, message:Message }) => {
+const ContactRow = ({ index, data, message }: { index: number, data: User, message: Message }) => {
     const date = new Date().toDateString()
     return (
-        <XStack backgroundColor={index % 2 == 0 ? "$blue2" : "white"} justifyContent="space-between" paddingVertical={"$3"} paddingHorizontal={"$5"}>
+
+        <XStack onPress={() => router.push(`/chat/${data.id}`)} backgroundColor={index % 2 == 0 ? "$blue2" : "white"} paddingVertical={"$3"} paddingHorizontal={"$5"}>
             <XStack gap={"$3"}>
                 <Avatar circular size="$6">
                     <Avatar.Image
@@ -37,15 +17,18 @@ const ContactRow = ({ index, data, message }: { index: number, data: User, messa
                     <Avatar.Fallback backgroundColor="$blue10" />
                 </Avatar>
 
-                <YStack>
-                    <SizableText fontWeight={"bold"}>{data.firstName} {data.lastName}</SizableText>
-                    <Text color={"$gray10"}>
-                        {message?.type === "text" ? message?.text : "Image"}
+                <YStack width={"$19"}>
+                    <XStack justifyContent="space-between">
+                        <SizableText fontWeight={"bold"}>{data.firstName} {data.lastName}</SizableText>
+                        <SizableText fontSize={10}>{date}</SizableText>
+                    </XStack>
+
+                    <Text color={"$gray10"} fontSize={12} numberOfLines={2}>
+                        {message?.text || "Image"}
                     </Text>
                 </YStack>
             </XStack>
 
-            <SizableText fontSize={10}>{date}</SizableText>
         </XStack>
     )
 }
@@ -67,7 +50,7 @@ const Page = () => {
     }, []);
 
     return (
-        <View flex={1} paddingVertical={"$5"}>
+        <View flex={1} paddingTop={"$10"}>
             {
                 Users.length < 1 || Messages.length < 1
                     ? <Text>Loading...</Text>
