@@ -1,41 +1,36 @@
 import { Message, User } from "@/type";
 import { router } from "expo-router";
 import React, { useEffect, useState } from "react";
-import { Spinner } from "tamagui";
-import { View, Text, Avatar, ScrollView, SizableText, XStack, YStack } from "tamagui";
+import { Paragraph, Spinner } from "tamagui";
+import { View, Avatar, ScrollView, SizableText, XStack, YStack } from "tamagui";
 
 const ContactRow = ({ index, data, message }: { index: number, data: User, message: Message }) => {
     const date = new Date().toDateString()
-    
+
     return (
-        <XStack 
-            onPress={() => router.push(`/chat/${data.id}`)} 
-            
-            backgroundColor={index % 2 == 0 ? "$blue2" : "white"} 
-            paddingVertical={"$3"}
-            paddingHorizontal={"$true"}
+        <XStack
+            onPress={() => router.push(`/chat/${data.id}`)}
+            backgroundColor={index % 2 == 0 ? "$blue2" : "white"}
+            w={"100%"} gap={"$3"} p={"$3"}
         >
-            <XStack gap={"$3"}>
                 <Avatar circular size="$6">
-                    <Avatar.Image
-                        accessibilityLabel="Cam"
-                        src={data.image}
-                    />
+                    <Avatar.Image src={data.image} accessibilityLabel="Cam"/>
                     <Avatar.Fallback backgroundColor="$blue10" />
                 </Avatar>
 
-                <YStack borderWidth={1} width={"$20"}>
+                <YStack f={1}>
                     <XStack justifyContent="space-between">
-                        <SizableText fontWeight={"bold"}>{data.firstName} {data.lastName}</SizableText>
+                        <SizableText fontWeight={"bold"}>
+                            {data.firstName} {data.lastName}
+                        </SizableText>
+
                         <SizableText fontSize={10}>{date}</SizableText>
                     </XStack>
 
-                    <Text color={"$gray10"} fontSize={12} numberOfLines={2}>
+                    <Paragraph color={"$gray10"} fontSize={12} numberOfLines={2}>
                         {message?.text || "Image"}
-                    </Text>
+                    </Paragraph>
                 </YStack>
-            </XStack>
-
         </XStack>
     )
 }
@@ -63,11 +58,11 @@ const Page = () => {
                     ? <Spinner alignItems="center" size="large" color="$blue10" />
                     : <ScrollView>
                         {Users.map((user, index) => <ContactRow
-                                key={index}
-                                index={index}
-                                data={user as User}
-                                message={Messages[index] as Message}
-                            />
+                            key={index}
+                            index={index}
+                            data={user as User}
+                            message={Messages[index] as Message}
+                        />
                         )}
                     </ScrollView>
             }
