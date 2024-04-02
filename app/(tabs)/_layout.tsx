@@ -35,16 +35,18 @@ export default function TabLayout() {
                 name="message"
                 options={{
                     title: 'Message',
+                    headerShown: true,
                     tabBarIcon: ({ color }) => <FontAwesome size={28} name="inbox" color={color} />,
+                    headerRight: () => <FontAwesome style={{ paddingRight: 18 }} size={22} name="search" />,
                 }}
             />
             <Tabs.Screen
                 name="profile"
                 options={{
                     title: 'Your profile',
-                    tabBarIcon: ({ color }) => <FontAwesome size={28} name="user" color={color} />,
                     headerShown: true,
-                    headerRight: () => <FontAwesome onPress={() => router.push('/settingsPage')} style={{ paddingRight: 18 }} size={28} name="gears" color={"orange"} />,
+                    tabBarIcon: ({ color }) => <FontAwesome size={28} name="user" color={color} />,
+                    headerRight: () => <FontAwesome onPress={() => router.push('/settings')} style={{ paddingRight: 18 }} size={22} name="gears" />,
                 }}
             />
         </Tabs>

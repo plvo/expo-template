@@ -13,24 +13,25 @@ const ContactRow = ({ index, data, message }: { index: number, data: User, messa
             backgroundColor={index % 2 == 0 ? "$blue2" : "white"}
             w={"100%"} gap={"$3"} p={"$3"}
         >
-                <Avatar circular size="$6">
-                    <Avatar.Image src={data.image} accessibilityLabel="Cam"/>
-                    <Avatar.Fallback backgroundColor="$blue10" />
-                </Avatar>
+            <Avatar circular size="$6">
+                <Avatar.Image src={data.image} accessibilityLabel="Cam" />
+                <Avatar.Fallback backgroundColor="$blue10" />
+            </Avatar>
 
-                <YStack f={1}>
-                    <XStack justifyContent="space-between">
-                        <SizableText fontWeight={"bold"}>
-                            {data.firstName} {data.lastName}
-                        </SizableText>
+            <YStack f={1}>
+                <XStack justifyContent="space-between">
+                    <SizableText fontWeight={"bold"}>
+                        {data.firstName} {data.lastName}
+                    </SizableText>
+                    <SizableText fontSize={10}>
+                        {date}
+                    </SizableText>
+                </XStack>
 
-                        <SizableText fontSize={10}>{date}</SizableText>
-                    </XStack>
-
-                    <Paragraph color={"$gray10"} fontSize={12} numberOfLines={2}>
-                        {message?.text || "Image"}
-                    </Paragraph>
-                </YStack>
+                <Paragraph color={"$gray10"} fontSize={12} numberOfLines={2}>
+                    {message?.text || "Image"}
+                </Paragraph>
+            </YStack>
         </XStack>
     )
 }
@@ -52,7 +53,7 @@ const Page = () => {
     }, []);
 
     return (
-        <View flex={1} justifyContent="center" paddingTop={"$10"}>
+        <View flex={1} justifyContent="center">
             {
                 Users.length < 1 || Messages.length < 1
                     ? <Spinner alignItems="center" size="large" color="$blue10" />
@@ -62,8 +63,7 @@ const Page = () => {
                             index={index}
                             data={user as User}
                             message={Messages[index] as Message}
-                        />
-                        )}
+                        />)}
                     </ScrollView>
             }
         </View>
