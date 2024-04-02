@@ -53,39 +53,31 @@ const Page = () => {
                 <XGroup gap={20}>
                     <Controller control={control}
                         name="firstname"
-                        rules={{
-                            required: true,
-                        }}
+                        rules={{ required: true, }}
                         render={({ field: { onChange, onBlur, value } }) => (
                             <YGroup flex={1}>
-                                <Label htmlFor='firstname' color={errors.firstname && '$red10'}>
+                                <Label htmlFor='firstname' color={errors.firstname ? '$red10' : 'black'}>
                                     {errors.firstname ? "Firstname is required" : "Firstname"}
                                 </Label>
                                 <Input
                                     placeholder="First name"
-                                    onBlur={onBlur}
-                                    onChangeText={onChange}
-                                    value={value}
+                                    onBlur={onBlur} onChangeText={onChange} value={value}
                                     borderColor={errors.firstname && '$red10'}
-                                    borderWidth={'$1'}
-                                    id='firstname'
+                                    borderWidth={errors.firstname && '$1'}
                                 />
                             </YGroup>
                         )}
                     />
                     <Controller control={control}
                         name="lastname"
-                        rules={{ maxLength: 100 }}
+                        rules={{ maxLength: 100, }}
                         render={({ field: { onChange, onBlur, value } }) => (
                             <YGroup flex={1}>
                                 <Label htmlFor='lastname'>Lastname</Label>
                                 <Input
                                     placeholder="Last name"
+                                    onBlur={onBlur} onChangeText={onChange} value={value}
                                     width={"100%"}
-                                    onBlur={onBlur}
-                                    onChangeText={onChange}
-                                    value={value}
-                                    id='lastname'
                                 />
                             </YGroup>
                         )}
@@ -95,16 +87,13 @@ const Page = () => {
                 <YStack>
                     <Controller control={control}
                         name="city"
-                        rules={{ maxLength: 100 }}
+                        rules={{ maxLength: 100, }}
                         render={({ field: { onChange, onBlur, value } }) => (
                             <YGroup>
                                 <Label htmlFor='city'>City</Label>
                                 <Input
                                     placeholder="City"
-                                    onBlur={onBlur}
-                                    onChangeText={onChange}
-                                    value={value}
-                                    id='city'
+                                    onBlur={onBlur} onChangeText={onChange} value={value}
                                 />
                             </YGroup>
                         )}
@@ -112,16 +101,13 @@ const Page = () => {
 
                     <Controller control={control}
                         name="birthday"
-                        rules={{ maxLength: 100 }}
+                        rules={{ maxLength: 100, }}
                         render={({ field: { onChange, onBlur, value } }) => (
                             <YGroup>
                                 <Label htmlFor='birthday'>Birthday</Label>
                                 <Input
                                     placeholder="Birthday"
-                                    onBlur={onBlur}
-                                    onChangeText={onChange}
-                                    value={value}
-                                    id='birthday'
+                                    onBlur={onBlur} onChangeText={onChange} value={value}
                                 />
                             </YGroup>
                         )}

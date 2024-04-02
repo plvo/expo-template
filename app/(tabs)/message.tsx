@@ -1,13 +1,20 @@
 import { Message, User } from "@/type";
 import { router } from "expo-router";
 import React, { useEffect, useState } from "react";
-import { Avatar, ScrollView, SizableText, Text, View, XStack, YStack } from "tamagui";
+import { Spinner } from "tamagui";
+import { View, Text, Avatar, ScrollView, SizableText, XStack, YStack } from "tamagui";
 
 const ContactRow = ({ index, data, message }: { index: number, data: User, message: Message }) => {
     const date = new Date().toDateString()
+    
     return (
-
-        <XStack onPress={() => router.push(`/chat/${data.id}`)} backgroundColor={index % 2 == 0 ? "$blue2" : "white"} paddingVertical={"$3"} paddingHorizontal={"$5"}>
+        <XStack 
+            onPress={() => router.push(`/chat/${data.id}`)} 
+            
+            backgroundColor={index % 2 == 0 ? "$blue2" : "white"} 
+            paddingVertical={"$3"}
+            paddingHorizontal={"$true"}
+        >
             <XStack gap={"$3"}>
                 <Avatar circular size="$6">
                     <Avatar.Image
@@ -17,7 +24,7 @@ const ContactRow = ({ index, data, message }: { index: number, data: User, messa
                     <Avatar.Fallback backgroundColor="$blue10" />
                 </Avatar>
 
-                <YStack width={"$19"}>
+                <YStack borderWidth={1} width={"$20"}>
                     <XStack justifyContent="space-between">
                         <SizableText fontWeight={"bold"}>{data.firstName} {data.lastName}</SizableText>
                         <SizableText fontSize={10}>{date}</SizableText>
@@ -50,12 +57,18 @@ const Page = () => {
     }, []);
 
     return (
-        <View flex={1} paddingTop={"$10"}>
+        <View flex={1} justifyContent="center" paddingTop={"$10"}>
             {
                 Users.length < 1 || Messages.length < 1
-                    ? <Text>Loading...</Text>
+                    ? <Spinner alignItems="center" size="large" color="$blue10" />
                     : <ScrollView>
-                        {Users.map((user, index) => <ContactRow index={index} data={user as User} message={Messages[index] as Message} />)}
+                        {Users.map((user, index) => <ContactRow
+                                key={index}
+                                index={index}
+                                data={user as User}
+                                message={Messages[index] as Message}
+                            />
+                        )}
                     </ScrollView>
             }
         </View>

@@ -1,7 +1,7 @@
 import "../global.css"
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import * as SplashScreen from 'expo-splash-screen';
-import * as Font from "expo-font";
+import { useFonts } from 'expo-font'
 import { Stack } from 'expo-router/stack';
 
 import '@tamagui/core/reset.css'
@@ -34,24 +34,26 @@ const toastConfig = {
     ),
 };
 
-// SplashScreen.preventAutoHideAsync();
+SplashScreen.preventAutoHideAsync();
 
 export default function AppLayout() {
-    // const [fontsLoaded, fontError] = Font.useFonts({
-    //     'Grotesk': require('@/assets/fonts/ArchivGrotesk.otf'),
-    // });
+    const [loaded] = useFonts({
+        Inter: require("@tamagui/font-inter/otf/Inter-Medium.otf"),
+        InterBold: require("@tamagui/font-inter/otf/Inter-Bold.otf"),
+        ArchiveGrotesk: require("../assets/fonts/ArchivGrotesk.otf")
+    });
 
-    // console.log(fontsLoaded, fontError);
+    useEffect(() => {
+        (async () => {
+            if (loaded) {
+                await SplashScreen.hideAsync();
+            }
+        })()
+    }, [loaded])
 
-    // const onLayoutRootView = useCallback(async () => {
-    //     if (fontsLoaded || fontError) {
-    //         await SplashScreen.hideAsync();
-    //     }
-    // }, [fontsLoaded, fontError]);
-
-    // if (!fontsLoaded && !fontError) {
-    //     return null;
-    // }
+    if (!loaded) {
+        return null;
+    }
 
     return (
         <TamaguiProvider config={tamaguiConfig}>
